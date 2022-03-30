@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Small_task.Models;
-using Small_task.ViewModel;
+using Small_task.ViewModels;
 using System.Diagnostics;
 
 namespace Small_task.Controllers
@@ -19,11 +19,17 @@ namespace Small_task.Controllers
             return View();
         }
 
+        public IActionResult Hello()
+        {
+            return View(new HelloViewModel { Name = "Anonim" });
+        }
 
         [HttpPost]
         public IActionResult Hello(HelloViewModel helloViewModel)
         {
-            return View(helloViewModel);
+            if(ModelState.IsValid)
+                return View(helloViewModel);
+            return View(nameof(Index), helloViewModel);
         }
 
         public IActionResult Privacy()
