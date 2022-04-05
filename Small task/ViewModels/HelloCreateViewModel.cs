@@ -2,7 +2,7 @@
 
 namespace Small_task.ViewModels
 {
-    public class HelloViewModel
+    public class HelloCreateViewModel
     {
         [Display(Name = "Name")]
         [Required(ErrorMessage = "Name is required")]

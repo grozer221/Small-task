@@ -5,31 +5,33 @@ using System.Diagnostics;
 
 namespace Small_task.Controllers
 {
-    public class HomeController : Controller
+    public class HelloControllerVitalik : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HelloControllerVitalik> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HelloControllerVitalik(ILogger<HelloControllerVitalik> logger)
         {
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            return View(new HelloCreateViewModel { Name = "Anonim" });
+        }
+
+        public IActionResult Create()
+        {
             return View();
         }
 
-        public IActionResult Hello()
-        {
-            return View(new HelloViewModel { Name = "Anonim" });
-        }
-
         [HttpPost]
-        public IActionResult Hello(HelloViewModel helloViewModel)
+        public IActionResult Create(HelloCreateViewModel helloViewModel)
         {
-            if(ModelState.IsValid)
-                return View(helloViewModel);
-            return View(nameof(Index), helloViewModel);
+            if (ModelState.IsValid)
+            {
+                return View(nameof(Index), helloViewModel);
+            }
+            return View(helloViewModel);
         }
 
         public IActionResult Privacy()
