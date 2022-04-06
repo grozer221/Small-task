@@ -7,13 +7,6 @@ namespace Small_task.Controllers
 {
     public class HelloControllerVitalik : Controller
     {
-        private readonly ILogger<HelloControllerVitalik> _logger;
-
-        public HelloControllerVitalik(ILogger<HelloControllerVitalik> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View(new HelloCreateViewModel { Name = "Anonim" });
@@ -32,11 +25,6 @@ namespace Small_task.Controllers
                 return View(nameof(Index), helloViewModel);
             }
             return View(helloViewModel);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -3,20 +3,21 @@ using Small_task.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Conventions.Add(new RouteVitalikPrefixConvention());
+});
+
 builder.Services.Configure<RazorViewEngineOptions>(options =>
 {
-    options.ViewLocationExpanders.Add(new CustomLocationExpander());
+    options.ViewLocationExpanders.Add(new ReverseViewFolderLocationExpander());
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Hello/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 else
@@ -31,10 +32,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapHelloControllerVitalikRoute();
+//app.MapHelloControllerVitalikRoute();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+    pattern: "{controller=Hello}/{action=Index}/{id?}");
 
 app.Run();
